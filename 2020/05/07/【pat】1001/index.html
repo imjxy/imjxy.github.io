@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.0"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>【pat】1001（Python format 格式化函数） - 好好学习，天天向上</title><meta description="艰难的刷题又开始了。"><meta property="og:type" content="blog"><meta property="og:title" content="【pat】1001（Python format 格式化函数）"><meta property="og:url" content="http://yoursite.com/2020/05/07/%E3%80%90pat%E3%80%911001/"><meta property="og:site_name" content="好好学习，天天向上"><meta property="og:description" content="艰难的刷题又开始了。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://i.loli.net/2020/05/07/PAMCorJnBu2p3hE.png"><meta property="article:published_time" content="2020-05-07T10:02:01.000Z"><meta property="article:modified_time" content="2020-05-07T10:43:57.474Z"><meta property="article:author" content="田土豆"><meta property="article:tag" content="pat"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://i.loli.net/2020/05/07/PAMCorJnBu2p3hE.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/05/07/%E3%80%90pat%E3%80%911001/"},"headline":"好好学习，天天向上","image":["https://i.loli.net/2020/05/07/PAMCorJnBu2p3hE.png"],"datePublished":"2020-05-07T10:02:01.000Z","dateModified":"2020-05-07T10:43:57.474Z","author":{"@type":"Person","name":"田土豆"},"description":"艰难的刷题又开始了。"}</script><link rel="canonical" href="http://yoursite.com/2020/05/07/%E3%80%90pat%E3%80%911001/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="好好学习，天天向上" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="thumbnail" src="https://i.loli.net/2020/05/07/PAMCorJnBu2p3hE.png" alt="【pat】1001（Python format 格式化函数）"></span></div><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2020-05-07T10:02:01.000Z" title="2020-05-07T10:02:01.000Z">2020-05-07</time><span class="level-item">6 分钟 读完 (大约 970 个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">【pat】1001（Python format 格式化函数）</h1><div class="content"><p>艰难的刷题又开始了。</p>
+<a id="more"></a>
+
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p><strong>1001</strong> <strong>A+B Format</strong></p>
+<p>Calculate <em>a</em>+<em>b</em> and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless there are less than four digits).</p>
+<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a><strong>Input Specification:</strong></h3><p>Each input file contains one test case. Each case contains a pair of integers <em>a</em> and <em>b</em> where −106≤<em>a</em>,<em>b</em>≤106. The numbers are separated by a space.</p>
+<h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a><strong>Output Specification:</strong></h3><p>For each test case, you should output the sum of <em>a</em> and <em>b</em> in one line. The sum must be written in the standard format.</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a><strong>Sample Input:</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1000000 9</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a><strong>Sample Output:</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-999,991</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>之前开始过很多次刷题，但是算法和数据结构方面实在是太薄弱了，不管是LeetCode还是pat还是oj都坚持不下去，这次必拿下<del>大概吧</del></p>
+<p>做第一题就充分暴露对语言的不熟悉了，这道题我还跟大一一样试图用乘法和取余取到每三个数然后加”，“</p>
+<p>但其实做除法时例如999001%1000=1而不是001，实在是太笨了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_plus</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> rem,res</span><br><span class="line">    line = input().split(<span class="string">" "</span>)</span><br><span class="line">    a, b = int(line[<span class="number">0</span>]), int(line[<span class="number">1</span>])</span><br><span class="line">    sum = a + b</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &lt; sum &lt; <span class="number">1000</span>) <span class="keyword">or</span> (<span class="number">-1000</span> &lt; sum &lt; <span class="number">0</span>):</span><br><span class="line">        <span class="comment">#print(sum)</span></span><br><span class="line">        <span class="keyword">return</span> str(sum)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        rem = sum % <span class="number">1000</span></span><br><span class="line">        sum = int(sum / <span class="number">1000</span>)</span><br><span class="line">        res = str(rem)</span><br><span class="line">        <span class="keyword">while</span> ((sum &gt; <span class="number">0</span> <span class="keyword">and</span> sum &lt; <span class="number">1000</span>) <span class="keyword">or</span> (sum &lt; <span class="number">0</span> <span class="keyword">and</span> sum &lt; <span class="number">-1000</span>)):</span><br><span class="line">            rem = sum % <span class="number">1000</span></span><br><span class="line">            sum = int(sum / <span class="number">1000</span>)</span><br><span class="line">            res = str(rem) + <span class="string">','</span> + res</span><br><span class="line">        res =str(sum) + <span class="string">','</span> + res</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">        <span class="comment">#print(res)</span></span><br></pre></td></tr></table></figure>
+
+<p>但是我去搜了搜，发现了Python format 格式化函数，其实学python时啃从入门到实践看到过，现在全忘了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal</span><span class="params">()</span>:</span></span><br><span class="line">    line = input().split(<span class="string">" "</span>)</span><br><span class="line">    a, b = int(line[<span class="number">0</span>]), int(line[<span class="number">1</span>])</span><br><span class="line">    print(<span class="string">"&#123;:,&#125;"</span>.format(a + b))</span><br></pre></td></tr></table></figure>
+
+<p>几行轻轻松松拿下。</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>Python2.6 开始，新增了一种格式化字符串的函数 <strong>str.format()</strong>，它增强了字符串格式化的功能。</p>
+<h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><ul>
+<li><p>format 函数可以接受不限个参数，位置可以不按顺序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#123;&#125; &#123;&#125;&quot;.format(&quot;hello&quot;, &quot;world&quot;)    # 不设置指定位置，按默认顺序</span><br><span class="line">&#39;hello world&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#123;0&#125; &#123;1&#125;&quot;.format(&quot;hello&quot;, &quot;world&quot;)  # 设置指定位置</span><br><span class="line">&#39;hello world&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#123;1&#125; &#123;0&#125; &#123;1&#125;&quot;.format(&quot;hello&quot;, &quot;world&quot;)  # 设置指定位置</span><br><span class="line">&#39;world hello world&#39;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以设置参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(name=<span class="string">"菜鸟教程"</span>, url=<span class="string">"www.runoob.com"</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过字典设置参数</span></span><br><span class="line">site = &#123;<span class="string">"name"</span>: <span class="string">"菜鸟教程"</span>, <span class="string">"url"</span>: <span class="string">"www.runoob.com"</span>&#125;</span><br><span class="line">print(<span class="string">"网站名：&#123;name&#125;, 地址 &#123;url&#125;"</span>.format(**site))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 通过列表索引设置参数</span></span><br><span class="line">my_list = [<span class="string">'菜鸟教程'</span>, <span class="string">'www.runoob.com'</span>]</span><br><span class="line">print(<span class="string">"网站名：&#123;0[0]&#125;, 地址 &#123;0[1]&#125;"</span>.format(my_list))  <span class="comment"># "0" 是必须的</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">网站名：菜鸟教程, 地址 www.runoob.com</span><br><span class="line">网站名：菜鸟教程, 地址 www.runoob.com</span><br><span class="line">网站名：菜鸟教程, 地址 www.runoob.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以向 <strong>str.format()</strong> 传入对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssignValue</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">my_value = AssignValue(<span class="number">6</span>)</span><br><span class="line">print(<span class="string">'value 为: &#123;0.value&#125;'</span>.format(my_value))  <span class="comment"># "0" 是可选的</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value 为: 6</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="数字格式化"><a href="#数字格式化" class="headerlink" title="数字格式化"></a>数字格式化</h2><p><strong>^</strong>, <strong>&lt;</strong>, <strong>&gt;</strong> 分别是居中、左对齐、右对齐，后面带宽度， <strong>:</strong> 号后面带填充的字符，只能是一个字符，不指定则默认是用空格填充。</p>
+<p><strong>+</strong> 表示在正数前显示 <strong>+</strong>，负数前显示 <strong>-</strong>； （空格）表示在正数前加空格</p>
+<p>b、d、o、x 分别是二进制、十进制、八进制、十六进制。</p>
+<table>
+<thead>
+<tr>
+<th align="left">数字</th>
+<th align="left">格式</th>
+<th align="left">输出</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">3.1415926</td>
+<td align="left">{:.2f}</td>
+<td align="left">3.14</td>
+<td align="left">保留小数点后两位</td>
+</tr>
+<tr>
+<td align="left">3.1415926</td>
+<td align="left">{:+.2f}</td>
+<td align="left">+3.14</td>
+<td align="left">带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td align="left">-1</td>
+<td align="left">{:+.2f}</td>
+<td align="left">-1.00</td>
+<td align="left">带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td align="left">2.71828</td>
+<td align="left">{:.0f}</td>
+<td align="left">3</td>
+<td align="left">不带小数</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">{:0&gt;2d}</td>
+<td align="left">05</td>
+<td align="left">数字补零 (填充左边, 宽度为2)</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">{:x&lt;4d}</td>
+<td align="left">5xxx</td>
+<td align="left">数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">{:x&lt;4d}</td>
+<td align="left">10xx</td>
+<td align="left">数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td align="left">1000000</td>
+<td align="left">{:,}</td>
+<td align="left">1,000,000</td>
+<td align="left">以逗号分隔的数字格式</td>
+</tr>
+<tr>
+<td align="left">0.25</td>
+<td align="left">{:.2%}</td>
+<td align="left">25.00%</td>
+<td align="left">百分比格式</td>
+</tr>
+<tr>
+<td align="left">1000000000</td>
+<td align="left">{:.2e}</td>
+<td align="left">1.00e+09</td>
+<td align="left">指数记法</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">{:&gt;10d}</td>
+<td align="left">13</td>
+<td align="left">右对齐 (默认, 宽度为10)</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">{:&lt;10d}</td>
+<td align="left">13</td>
+<td align="left">左对齐 (宽度为10)</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">{:^10d}</td>
+<td align="left">13</td>
+<td align="left">中间对齐 (宽度为10)</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;:b&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="string">'&#123;:d&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="string">'&#123;:o&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="string">'&#123;:x&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="string">'&#123;:#x&#125;'</span>.format(<span class="number">11</span>)</span><br><span class="line"><span class="string">'&#123;:#X&#125;'</span>.format(<span class="number">11</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1011</span><br><span class="line">11</span><br><span class="line">13</span><br><span class="line">b</span><br><span class="line">0xb</span><br><span class="line">0XB</span><br></pre></td></tr></table></figure>
+
+<h1 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h1><ul>
+<li>这次好好做一个题就总结一下，至少可以坚持下来多学点东西</li>
+<li>其实还是蛮想在重新看一下java，这周快点把手里事情了了，尽量这周末看一下</li>
+</ul>
+</div><div class="article-tags size-small is-uppercase mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/pat/">pat</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" style="background-color:rgba(255,128,62,.87);border-color:transparent;color:white;" target="_blank" rel="noopener"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/07/%E5%9F%BA%E4%BA%8EMobileNetv2%E7%9A%84%E8%AF%86%E5%88%ABdemo/"><span class="level-item">基于mobilenetv2的识别demo</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread' ,
+            notify: false,
+            verify: false,
+            appId: 'iaU4Euu6nzJsbEOab2EK2az9-gzGzoHsz',
+            appKey: '4HEpEpkxC0tY2kS3o4E77yXu',
+            placeholder: '哈喽哈',
+            avatar: 'mm',
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            visitor: false,
+            highlight: true,
+            recordIP: false
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="" src="https://pic1.zhimg.com/80/v2-0cd9391d8130e9059784c936d531a2f0_720w.jpg" alt="田土豆"></figure><p class="title is-size-4 is-block line-height-inherit">田土豆</p><p class="is-size-6 is-block">今天开学了么</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan,China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/imjxy" target="_blank" rel="noopener">关注我</a></div></div></div><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#问题描述"><span class="mr-2">1</span><span>问题描述</span></a><ul class="menu-list"><ul class="menu-list"><li><a class="is-flex" href="#Input-Specification"><span class="mr-2">1.1.1</span><span>Input Specification:</span></a></li><li><a class="is-flex" href="#Output-Specification"><span class="mr-2">1.1.2</span><span>Output Specification:</span></a></li><li><a class="is-flex" href="#Sample-Input"><span class="mr-2">1.1.3</span><span>Sample Input:</span></a></li><li><a class="is-flex" href="#Sample-Output"><span class="mr-2">1.1.4</span><span>Sample Output:</span></a></li></ul></ul></li><li><a class="is-flex" href="#解决方法"><span class="mr-2">2</span><span>解决方法</span></a></li><li><a class="is-flex" href="#笔记"><span class="mr-2">3</span><span>笔记</span></a><ul class="menu-list"><li><a class="is-flex" href="#字符串格式化"><span class="mr-2">3.1</span><span>字符串格式化</span></a></li><li><a class="is-flex" href="#数字格式化"><span class="mr-2">3.2</span><span>数字格式化</span></a></li></ul></li><li><a class="is-flex" href="#闲话"><span class="mr-2">4</span><span>闲话</span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="https://github.com" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Github</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><a class="media-left" href="/2020/05/07/%E3%80%90pat%E3%80%911001/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/07/PAMCorJnBu2p3hE.png" alt="【pat】1001（Python format 格式化函数）"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-07T10:02:01.000Z">2020-05-07</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/07/%E3%80%90pat%E3%80%911001/">【pat】1001（Python format 格式化函数）</a></p><p class="is-uppercase"></p></div></article><article class="media"><a class="media-left" href="/2020/05/07/%E5%9F%BA%E4%BA%8EMobileNetv2%E7%9A%84%E8%AF%86%E5%88%ABdemo/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/07/KtZEXObRAGHosQ1.jpg" alt="基于mobilenetv2的识别demo"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-07T03:41:47.000Z">2020-05-07</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/07/%E5%9F%BA%E4%BA%8EMobileNetv2%E7%9A%84%E8%AF%86%E5%88%ABdemo/">基于mobilenetv2的识别demo</a></p><p class="is-uppercase"></p></div></article><article class="media"><a class="media-left" href="/2020/05/06/%E5%9B%BE%E7%89%87%E8%BD%ACbase64%E5%B0%8F%E5%B7%A5%E5%85%B7/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/06/EFuIaMzAbojy7OV.jpg" alt="图片转base64小工具"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-06T09:42:36.000Z">2020-05-06</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/06/%E5%9B%BE%E7%89%87%E8%BD%ACbase64%E5%B0%8F%E5%B7%A5%E5%85%B7/">图片转base64小工具</a></p><p class="is-uppercase"></p></div></article><article class="media"><a class="media-left" href="/2020/05/05/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/06/MagvQSVkI6qHZGO.jpg" alt="【博客搭建】从零开始的博客搭建"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-05T13:07:34.000Z">2020-05-05</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/05/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">【博客搭建】从零开始的博客搭建</a></p><p class="is-uppercase"></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/pat/"><span class="tag">pat</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pyside2/"><span class="tag">pyside2</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"><span class="tag">博客搭建</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="好好学习，天天向上" height="28"></a><p class="size-small"><span>&copy; 2020 田土豆</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
