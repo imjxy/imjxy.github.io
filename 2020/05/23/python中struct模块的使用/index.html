@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.0"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>python中struct模块的使用 - 好好学习，天天向上</title><meta description="昨天说过的关于数据格式转换的struct模块"><meta property="og:type" content="blog"><meta property="og:title" content="python中struct模块的使用"><meta property="og:url" content="http://yoursite.com/2020/05/23/python%E4%B8%ADstruct%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/"><meta property="og:site_name" content="好好学习，天天向上"><meta property="og:description" content="昨天说过的关于数据格式转换的struct模块"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://i.loli.net/2020/05/24/Iivq1olJOs9r6by.png"><meta property="article:published_time" content="2020-05-23T12:52:29.000Z"><meta property="article:modified_time" content="2020-05-24T12:41:38.823Z"><meta property="article:author" content="田土豆"><meta property="article:tag" content="struct"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://i.loli.net/2020/05/24/Iivq1olJOs9r6by.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/05/23/python%E4%B8%ADstruct%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/"},"headline":"好好学习，天天向上","image":["https://i.loli.net/2020/05/24/Iivq1olJOs9r6by.png"],"datePublished":"2020-05-23T12:52:29.000Z","dateModified":"2020-05-24T12:41:38.823Z","author":{"@type":"Person","name":"田土豆"},"description":"昨天说过的关于数据格式转换的struct模块"}</script><link rel="canonical" href="http://yoursite.com/2020/05/23/python%E4%B8%ADstruct%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="好好学习，天天向上" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="thumbnail" src="https://i.loli.net/2020/05/24/Iivq1olJOs9r6by.png" alt="python中struct模块的使用"></span></div><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2020-05-23T12:52:29.000Z" title="2020-05-23T12:52:29.000Z">2020-05-23</time><span class="level-item"><a class="link-muted" href="/categories/python/">python</a></span><span class="level-item">15 分钟 读完 (大约 2264 个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">python中struct模块的使用</h1><div class="content"><p>昨天说过的关于数据格式转换的struct模块</p>
+<a id="more"></a>
+
+<blockquote>
+<p>Python是一门非常简洁的语言，对于数据类型的表示，不像其他语言预定义了许多类型（如：在C#中，光整型就定义了8种），它只定义了六种基本类型：字符串，整数，浮点数，元组，列表，字典。通过这六种数据类型，我们可以完成大部分工作。但当Python需要通过网络与其他的平台进行交互的时候，必须考虑到将这些数据类型与其他平台或语言之间的类型进行互相转换问题。打个比方：C++写的客户端发送一个int型(4字节)变量的数据到Python写的服务器，Python接收到表示这个整数的4个字节数据，怎么解析成Python认识的整数呢？ Python的标准模块struct就用来解决这个问题。</p>
+</blockquote>
+<p>本文大量参考<a href="https://blog.csdn.net/qq_30638831/article/details/80421019">python之struct详解</a>、<a href="https://www.jianshu.com/p/7d2576efdac2">【Python】struct 模块</a>、<a href="https://www.cnblogs.com/gaara-zhang/p/10148162.html">[python struct详解]</a>。</p>
+<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ul>
+<li><p>按照指定格式将Python数据转换为字符串,该字符串为字节流,如网络传输时,不能传输int,此时先将int转化为字节流,然后再发送;</p>
+</li>
+<li><p>按照指定格式将字节流转换为Python指定的数据类型;</p>
+</li>
+<li><p>处理二进制数据,如果用struct来处理文件的话,需要用’wb’,’rb’以二进制(字节流)写,读的方式来处理文件;</p>
+</li>
+<li><p>处理c语言中的结构体;</p>
+</li>
+</ul>
+<h1 id="主要函数"><a href="#主要函数" class="headerlink" title="主要函数"></a>主要函数</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>return</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pack(fmt,v1,v2…)</td>
+<td>string</td>
+<td>按照给定的格式(fmt),把数据v1,v2等等转换成字符串(字节流),并将该字符串返回</td>
+</tr>
+<tr>
+<td>pack_into(fmt,buffer,offset,v1,v2…)</td>
+<td>None</td>
+<td>按照给定的格式(fmt),将数据转换成字符串(字节流),并将字节流写入以offset开始的buffer中.(buffer为可写的缓冲区,可用array模块)</td>
+</tr>
+<tr>
+<td>unpack(fmt,v1,v2…..)</td>
+<td>tuple</td>
+<td>按照给定的格式(fmt)解析字节流,并返回解析结果</td>
+</tr>
+<tr>
+<td>pack_from(fmt,buffer,offset)</td>
+<td>tuple</td>
+<td>按照给定的格式(fmt)解析以offset开始的缓冲区,并返回解析结果</td>
+</tr>
+<tr>
+<td>calcsize(fmt)</td>
+<td>size of fmt</td>
+<td>计算给定的格式(fmt)占用多少字节的内存，注意对齐方式</td>
+</tr>
+</tbody></table>
+<p>其中格式fmt的构成包括下面数据类型和数据对齐方式</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>C Type</th>
+<th>Python type</th>
+<th>Standard</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x</td>
+<td>pad byte</td>
+<td>no value</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>c</td>
+<td>char</td>
+<td>bytes of length 1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>b</td>
+<td>signed char</td>
+<td>integer</td>
+<td>1</td>
+<td>(1), (3)</td>
+</tr>
+<tr>
+<td>B</td>
+<td>unsigned char</td>
+<td>integer</td>
+<td>1</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>?</td>
+<td>_Bool</td>
+<td>bool</td>
+<td>1</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td>h</td>
+<td>short</td>
+<td>integer</td>
+<td>2</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>H</td>
+<td>unsigned short</td>
+<td>integer</td>
+<td>2</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>i</td>
+<td>int</td>
+<td>integer</td>
+<td>4</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>I</td>
+<td>unsigned int</td>
+<td>integer</td>
+<td>4</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>l</td>
+<td>long</td>
+<td>integer</td>
+<td>4</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>L</td>
+<td>unsigned long</td>
+<td>integer</td>
+<td>4</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td>q</td>
+<td>long long</td>
+<td>integer</td>
+<td>8</td>
+<td>(2), (3)</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>unsigned long long</td>
+<td>integer</td>
+<td>8</td>
+<td>(2), (3)</td>
+</tr>
+<tr>
+<td>n</td>
+<td>ssize_t</td>
+<td>integer</td>
+<td>(4)</td>
+<td></td>
+</tr>
+<tr>
+<td>N</td>
+<td>size_t</td>
+<td>integer</td>
+<td>(4)</td>
+<td></td>
+</tr>
+<tr>
+<td>e</td>
+<td>(7)</td>
+<td>float</td>
+<td>2</td>
+<td>(5)</td>
+</tr>
+<tr>
+<td>f</td>
+<td>float</td>
+<td>float</td>
+<td>4</td>
+<td>(5)</td>
+</tr>
+<tr>
+<td>d</td>
+<td>double</td>
+<td>float</td>
+<td>8</td>
+<td>(5)</td>
+</tr>
+<tr>
+<td>s</td>
+<td>char[]</td>
+<td>bytes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>p</td>
+<td>char[]</td>
+<td>bytes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>P</td>
+<td>void *</td>
+<td>integer</td>
+<td>(6)</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>备注：</p>
+<ul>
+<li><p><code>?</code> 转换码对应于 C99 定义的 <code>_Bool</code> 类型。如果此类型不可用，则使用 char 进行模拟。在标准模式下，它始终由一个字节表示。</p>
+</li>
+<li><p>仅当平台 C 编译器支持 C long long，或者在 Windows 上支持 <code>__int64</code>时，<code>q</code> 和 <code>Q</code> 转换代码才能以纯模式提供。它们始终以标准模式提供。</p>
+</li>
+<li><p>当尝试使用任何整数转换码打包非整数时，如果非整数具有 <code>__index __()</code> 方法，则调用该方法以在打包之前将参数转换为整数。</p>
+</li>
+<li><p><code>n</code> 和 <code>N</code> 转换码仅适用于本机大小（选择为默认值或带有 <code>@</code> 字节顺序字符）。对于标准大小，您可以使用适合您的应用程序的其他整数格式。</p>
+</li>
+<li><p>对于 <code>f</code>，<code>d</code> 和 <code>e</code> 转换码，打包表示使用 IEEE 754 binary32，binary64 或binary16 格式（分别用于<code>f</code>，<code>d</code> 和 <code>e</code>），无论浮平台用的什么浮点格式。</p>
+</li>
+<li><p><code>P</code> 格式字符仅适用于本机字节排序（选择为默认字符或带有 <code>@</code> 字节顺序字符）。字节顺序字符 <code>=</code> 选择使用基于主机系统的小端或大端排序。 struct 模块不会将其解释为本机排序，因此 <code>P</code> 格式不可用。</p>
+</li>
+<li><p>IEEE 754 二进制 16 “半精度” 类型是在 2008 年的 IEEE 754 标准修订版中引入的。它有一个符号位，一个 5 位指数和 11 位精度（显式存储 10 位），并且可以完全精确地表示大约 6.1e-05和6.5e + 04 之间的数字。 C编译器并不广泛支持这种类型：在典型的机器上，unsigned short 可用于存储，但不能用于数学运算。有关详细信息，请参阅有关半精度浮点格式的 Wikipedia 页面。</p>
+</li>
+</ul>
+<p>格式字符之前可以是整数重复计数。例如，格式字符串 <code>4h</code> 表示与 <code>hhhh</code> 完全相同。<br> 格式之间的空白字符被忽略；计数及其格式不得包含空格。<br> 对于 <code>s</code> 格式字符，count 被解释为字节的长度，而不是像其他格式字符那样的重复计数。例如，<code>10s</code> 表示单个 10 字节字符串，而 <code>10c</code> 表示 10 个字符。如果未给出计数，则默认为1。对于打包，字符串将被截断或填充为适当的空字节以使其适合。对于解包，生成的字节对象始终具有指定的字节数。作为一种特殊情况，<code>0</code> 表示单个空字符串（而 <code>0c</code> 表示 0 个字符）。<br> 当使用整数格式（<code>b</code>，<code>B</code>，<code>h</code>，<code>H</code>，<code>i</code>，<code>I</code>，<code>l</code>，<code>L</code>，<code>q</code>，<code>Q</code>）之一打包值 x 时，如果 x 超出该格式的有效范围，则引发 <code>struct.error</code>。<br> <code>p</code> 格式字符编码 “Pascal字符串”，表示存储在固定字节数中的短可变长度字符串，由 count 给出。存储的第一个字节是字符串的长度，或255，取较小者。字符串的字节如下。如果传入 <code>pack()</code> 的字符串太长（长于 count-1），则只存储字符串的前导 count-1 字节。如果字符串短于 count-1，则用空字节填充，以便使用所有字节中的精确计数字节。请注意，对于 <code>unpack()</code>，<code>p</code> 格式字符使用 count 个字节，但返回的字符串永远不会包含超过 255 个字节。</p>
+<p>对于 <code>？</code> 格式字符，返回值为 True 或 False。打包时，使用参数对象的真值。将打包本机或标准 bool 表示中的 0 或 1，并且在解包时任何非零值都将为 True。</p>
+<h1 id="数据对齐方式"><a href="#数据对齐方式" class="headerlink" title="数据对齐方式"></a>数据对齐方式</h1><p>为了同c中的结构体交换数据，还要考虑有的c或c++编译器使用了字节对齐，通常是以4个字节为单位的32位系统，故而struct根据本地机器字节顺序转换.可以用格式中的第一个字符来改变对齐方式.定义如下：</p>
+<p><img src="C:/Users/HASEE/AppData/Roaming/Typora/typora-user-images/image-20200524202442408.png" alt="image-20200524202442408"></p>
+<p>使用方法是放在fmt的第一个位置，就像‘@5s6sif’</p>
+<p>示例1：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Header</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> short id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>[<span class="number">4</span>] tag;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> version;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过socket.recv接收到了一个上面的结构体数据，存在字符串s中，现在需要把它解析出来，可以使用unpack()函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">id, tag, version, count = struct.unpack(<span class="string">"!H4s2I"</span>, s)</span><br></pre></td></tr></table></figure>
+
+<p>上面的格式字符串中，!表示我们要使用网络字节顺序解析，因为我们的数据是从网络中接收到的，在网络上传送的时候它是网络字节顺序的.后面的H表示 一个<code>unsigned short</code>的id,4s表示4字节长的字符串，2I表示有两个<code>unsigned int</code>类型的数据.</p>
+<p>就通过一个unpack，现在id, tag, version, count里已经保存好我们的信息了.</p>
+<p>同样，也可以很方便的把本地数据再pack成struct格式.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss = struct.pack(<span class="string">"!H4s2I"</span>, id, tag, version, count)</span><br></pre></td></tr></table></figure>
+
+<p>pack函数就把id, tag, version, count按照指定的格式转换成了结构体Header，ss现在是一个字符串(实际上是类似于c结构体的字节流)，可以通过<code>socket.send(ss)</code>把这个字符串发送出去.</p>
+<p>在我一开头举的那几个参考网站里还有很多和详细的例子。</p>
+<h1 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h1><ul>
+<li><p>其实昨天就开始写这篇了，但是这个表格复制的我心态爆炸，一直拖到了今天晚上（2020/5/24/20:32)</p>
+</li>
+<li><p>最近复习效率依旧低下，甚至大白天就给自己找游戏玩了，哎还是要多push自己，从今天开始复习专业课，保证每天的产出</p>
+</li>
+</ul>
+</div><div class="article-tags size-small is-uppercase mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/struct/">struct</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" style="background-color:rgba(255,128,62,.87);border-color:transparent;color:white;" target="_blank" rel="noopener"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/22/%E5%9F%BA%E4%BA%8Emobilenetv2%E7%9A%84%E8%AF%86%E5%88%ABdemo-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%AF%86%E5%88%AB%E9%80%9F%E5%BA%A6%E7%9A%84%E4%BC%98%E5%8C%96/"><span class="level-item">基于mobilenetv2的识别demo--服务器的配置与识别速度的优化</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread' ,
+            notify: false,
+            verify: false,
+            appId: 'iaU4Euu6nzJsbEOab2EK2az9-gzGzoHsz',
+            appKey: '4HEpEpkxC0tY2kS3o4E77yXu',
+            placeholder: '哈喽哈',
+            avatar: 'mm',
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            visitor: false,
+            highlight: true,
+            recordIP: false
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="" src="https://pic1.zhimg.com/80/v2-0cd9391d8130e9059784c936d531a2f0_720w.jpg" alt="田土豆"></figure><p class="title is-size-4 is-block line-height-inherit">田土豆</p><p class="is-size-6 is-block">今天开学了么</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan,China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/imjxy" target="_blank" rel="noopener">关注我</a></div></div></div><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#作用"><span class="mr-2">1</span><span>作用</span></a></li><li><a class="is-flex" href="#主要函数"><span class="mr-2">2</span><span>主要函数</span></a></li><li><a class="is-flex" href="#数据类型"><span class="mr-2">3</span><span>数据类型</span></a></li><li><a class="is-flex" href="#数据对齐方式"><span class="mr-2">4</span><span>数据对齐方式</span></a></li><li><a class="is-flex" href="#闲话"><span class="mr-2">5</span><span>闲话</span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile is-mobile" href="https://github.com" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Github</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/python/"><span class="level-start"><span class="level-item">python</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><a class="media-left" href="/2020/05/23/python%E4%B8%ADstruct%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/24/Iivq1olJOs9r6by.png" alt="python中struct模块的使用"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-23T12:52:29.000Z">2020-05-23</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/23/python%E4%B8%ADstruct%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/">python中struct模块的使用</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/python/">python</a></p></div></article><article class="media"><a class="media-left" href="/2020/05/22/%E5%9F%BA%E4%BA%8Emobilenetv2%E7%9A%84%E8%AF%86%E5%88%ABdemo-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%AF%86%E5%88%AB%E9%80%9F%E5%BA%A6%E7%9A%84%E4%BC%98%E5%8C%96/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/22/anEvyeNDw9WLROJ.png" alt="基于mobilenetv2的识别demo--服务器的配置与识别速度的优化"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-22T11:58:06.000Z">2020-05-22</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/22/%E5%9F%BA%E4%BA%8Emobilenetv2%E7%9A%84%E8%AF%86%E5%88%ABdemo-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%AF%86%E5%88%AB%E9%80%9F%E5%BA%A6%E7%9A%84%E4%BC%98%E5%8C%96/">基于mobilenetv2的识别demo--服务器的配置与识别速度的优化</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/python/">python</a></p></div></article><article class="media"><a class="media-left" href="/2020/05/11/mysql%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/11/iIo5wYBZK1a3DGu.png" alt="mysql的安装与摸鱼"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-11T06:06:55.000Z">2020-05-11</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/11/mysql%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">mysql的安装与摸鱼</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></p></div></article><article class="media"><a class="media-left" href="/2020/05/09/exifread-%E4%BD%BF%E7%94%A8python%E8%8E%B7%E5%8F%96%E5%9B%BE%E5%83%8F%E4%BF%A1%E6%81%AF%EF%BC%88%E4%BA%8C%EF%BC%89/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/08/DBKylOtbYmF6zRx.jpg" alt="exifread--使用python获取图像信息（二）"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-09T10:25:15.000Z">2020-05-09</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/09/exifread-%E4%BD%BF%E7%94%A8python%E8%8E%B7%E5%8F%96%E5%9B%BE%E5%83%8F%E4%BF%A1%E6%81%AF%EF%BC%88%E4%BA%8C%EF%BC%89/">exifread--使用python获取图像信息（二）</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/python/">python</a></p></div></article><article class="media"><a class="media-left" href="/2020/05/08/exifread-%E4%BD%BF%E7%94%A8python%E8%8E%B7%E5%8F%96%E5%9B%BE%E5%83%8F%E4%BF%A1%E6%81%AF/"><p class="image is-64x64"><img class="thumbnail" src="https://i.loli.net/2020/05/08/1Cbk5HvriBnY8LD.png" alt="exifread--使用python获取图像信息（一）"></p></a><div class="media-content size-small"><p><time dateTime="2020-05-08T15:28:15.000Z">2020-05-08</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/08/exifread-%E4%BD%BF%E7%94%A8python%E8%8E%B7%E5%8F%96%E5%9B%BE%E5%83%8F%E4%BF%A1%E6%81%AF/">exifread--使用python获取图像信息（一）</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/python/">python</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/exifread/"><span class="tag">exifread</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mysql/"><span class="tag">mysql</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pat/"><span class="tag">pat</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pyside2/"><span class="tag">pyside2</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/struct/"><span class="tag">struct</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"><span class="tag">博客搭建</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="好好学习，天天向上" height="28"></a><p class="size-small"><span>&copy; 2020 田土豆</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
